@@ -1,12 +1,24 @@
-from flask import Flask
+from flask import Flask , Blueprint
+from flask_sqlalchemy import SQLAlchemy
+from routes.players_routes import players_bp
+from models import db
 
-app = Flask(__name__)
 
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///nba_stats.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+    db.init_app(app)
+
+    app.register_blueprint(players_bp)
+
+    with app.app_context():
+        db.create_all()
+
+    return app
 
 
 if __name__ == '__main__':
-    app.run()
+    app = create_app()
+    app.run(debug=True)
