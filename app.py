@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from routes.players_routes import players_bp
 from models import db
 from services import read_from_api
+from services.process_nba_json_data import process_nba_data
 
 #building and configuring the aplication and database
 
@@ -21,10 +22,13 @@ def create_app():
     return app
 
 #Receiving data and placing it in an appropriate object
-result22 = read_from_api('http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataAdvancedPlayoffs/season/2022')
-result23 = read_from_api('http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataAdvancedPlayoffs/season/2023')
-result24 = read_from_api('http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataAdvancedPlayoffs/season/2024')
+SEASON = ""
+URL_API = f'http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataAdvancedPlayoffs/season/{SEASON}'
 
+SEASON_LST = ["2022","2023","2024"]
+for i in SEASON_LST:
+    SEASON = i
+    process_nba_data(read_from_api(URL_API))
 
 
 
