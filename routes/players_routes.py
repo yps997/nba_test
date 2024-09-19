@@ -9,8 +9,6 @@ players_bp = Blueprint('players', __name__, url_prefix='/api/players')
 
 
 URL: /api/players?position={position}&season={season}
-
-#ליצור סוויצ/ כייס בתקיית שירותים
 VALID_POSITIONS = ['C', 'PF', 'SF', 'SG', 'PG']
 
 
