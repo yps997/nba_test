@@ -3,12 +3,14 @@ from models.classes import Player, PlayerSeason
 from models import db
 import calculator_properties_for_objects
 from services.calculator_properties_for_objects import Calculate_atr, Calculate_ppg
+from processes.start_process import DICT_CALCULATE_POSATION
 
+#position_average
+def Create_objects(dct_players:dict):
+    position_average =
 
-def Create_objects(dct_players:dict, position_average: int):
     #בדיקה האם השחקן כבר קיים
     existing_player = Player.query.get(dct_players["playerId"])
-
     if existing_player:
         # עדכון שחקן קיים
         existing_player._twoPercent += dct_players['twoPercent']

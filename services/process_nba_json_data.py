@@ -1,6 +1,6 @@
 import json
 
-def process_nba_data(json_content):
+def process_nba_data(json_content: str)->list | dict:
 
     # Convert the JSON string to a Python object
     players_data = json.loads(json_content)

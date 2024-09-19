@@ -4,6 +4,7 @@ from routes.players_routes import players_bp
 from models import db
 from services import read_from_api
 from services.process_nba_json_data import process_nba_data
+from processes.start_process import Run_process
 
 #building and configuring the aplication and database
 
@@ -22,13 +23,13 @@ def create_app():
     return app
 
 #Receiving data and placing it in an appropriate object
-SEASON = ""
-URL_API = f'http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataAdvancedPlayoffs/season/{SEASON}'
 
+#base url
+URL_API = 'http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataAdvancedPlayoffs/season'
+#list of season
 SEASON_LST = ["2022","2023","2024"]
-for i in SEASON_LST:
-    SEASON = i
-    result = process_nba_data(read_from_api(URL_API))
+#start program
+Run_process(URL_API, SEASON_LST)
 
 
 

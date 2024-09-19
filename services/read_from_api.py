@@ -1,7 +1,7 @@
 import requests
 
 #Sending a request to receive data from an API
-def get_data_from_api(url, params=None):
+def get_data_from_api(url: str, params=None):
     try:
         response = requests.get(url, params=params)
 
