@@ -8,10 +8,9 @@ players_bp = Blueprint('players', __name__, url_prefix='/api/players')
 
 
 
-URL: /api/players?position={position}&season={season}
+# URL: /api/players?position={position}&season={season}
+
 VALID_POSITIONS = ['C', 'PF', 'SF', 'SG', 'PG']
-
-
 @players_bp.route('/', methods=['GET'])
 def get_players():
     position = request.args.get('position')
