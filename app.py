@@ -28,7 +28,7 @@ URL_API = f'http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataAdvancedPlayoffs
 SEASON_LST = ["2022","2023","2024"]
 for i in SEASON_LST:
     SEASON = i
-    process_nba_data(read_from_api(URL_API))
+    result = process_nba_data(read_from_api(URL_API))
 
 
 

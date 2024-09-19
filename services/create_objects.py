@@ -1,40 +1,40 @@
 from flask import Flask
 from models.classes import Player, PlayerSeason
 from models import db
+import calculator_properties_for_objects
+from services.calculator_properties_for_objects import Calculate_atr, Calculate_ppg
 
 
-def Create_objects(dct:dict):
+def Create_objects(dct_players:dict, position_average: int):
     #בדיקה האם השחקן כבר קיים
-    existing_player = Player.query.get(dct["playerId"])
+    existing_player = Player.query.get(dct_players["playerId"])
 
     if existing_player:
         # עדכון שחקן קיים
-        existing_player._twoPercent += dct['twoPercent']
-        existing_player._threePercent += dct['threePercent']
+        existing_player._twoPercent += dct_players['twoPercent']
+        existing_player._threePercent += dct_players['threePercent']
 
     # אם שחקן לא קיים
     else:
         #יצירת שחקן חדש
      Player(
-        _player_id=dct['playerId'],
-        _name=dct['playerName'],
-        _twoPercent=dct['twoPercent'],
-        _threePercent=dct['threePercent']
+        _player_id=dct_players['playerId'],
+        _name=dct_players['playerName'],
+        _twoPercent=dct_players['twoPercent'],
+        _threePercent=dct_players['threePercent']
     )
     #יצירת משימה (נוצר תמיד)
     PlayerSeason(
-    _player_id = dct['playerId'],
-    _season = dct['season'],
-    _points_count = dct['points'],
-    _games_count = dct['games'],
-    _position = dct['position'],
-    _team = dct['team'],
-    _atr = dct [23],
-    _ppg = dct[0],
+    _player_id = dct_players['playerId'],
+    _season = dct_players['season'],
+    _points_count = dct_players['points'],
+    _games_count = dct_players['games'],
+    _position = dct_players['position'],
+    _team = dct_players['team'],
+    _atr = dct_players["assists"] / dct_players["turnovers"],
+    _ppg = (dct_players["points"] / dct_players["games"]) / position_average,
     )
-        """
-        לחשב נקודות ואחוזי קליעה
-        """
+
             
 
 
